@@ -132,10 +132,6 @@
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
       // debugger;
-
-
-
-
       var board = this.attributes;
 
       if (board[0][0] === 1 && board[2][0] === 1) {
@@ -158,11 +154,39 @@
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
 
+
+      // top left to bottom right
+
+
+
+      //2.
+      // check upwards until we hit a boundary
+        // row - 1, col - 1
+      // check down until we hit a boundary
+        // row + 1, col + 1
+
+      // if ANY set of coordinates hits another while iterating diagonally, return true
+      // return false if we finish iterating
+
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+
+
+
+
+    //1.
+      // collect coordinates of all the pieces (1's)
+      //
+
+    // 2.
+      // iterate the coordinates
+        // if it hasMajorDiagonalConflictAt(current set of coordinates)
+          // return true
+
+      // if we finish iterating, return false
+
     },
 
 
