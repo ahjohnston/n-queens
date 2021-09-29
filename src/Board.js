@@ -79,13 +79,33 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      var board = this.attributes;
+      var row = board[rowIndex];
+      var piecesInRow = 0;
+
+      for (var i = 0; i < board.n; i++) {
+        if (board[rowIndex][i] === 1) {
+          piecesInRow++;
+        }
+
+        if (piecesInRow > 1) {
+          return true;
+        }
+      }
+      return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var board = this.attributes;
+      for (var i = 0; i < board.n; i++) {
+        if (this.hasRowConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
+
 
 
 
@@ -94,12 +114,40 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      var board = this.attributes;
+      var piecesInColumn = 0;
+      for (var row = 0; row < board.n; row++) {
+        if (board[row][colIndex] === 1) {
+          piecesInColumn++;
+        }
+        if (piecesInColumn > 1) {
+          return true;
+        }
+      }
+      return false;
+
+
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      // debugger;
+
+
+
+
+      var board = this.attributes;
+
+      if (board[0][0] === 1 && board[2][0] === 1) {
+        debugger;
+      }
+
+      for (var column = 0; column < board.n; column++) {
+        if (this.hasColConflictAt(column)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -109,7 +157,7 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+
     },
 
     // test if any major diagonals on this board contain conflicts
