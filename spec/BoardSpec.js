@@ -10,22 +10,10 @@ describe('Board', function() {
     var board = new Board(matrix);
     _.map('row col rooks majorDiagonal minorDiagonal queens'.split(' '), function(conflictType) {
 
-
-      // if (board.attributes[0][0] === 1 && board.attributes[2][0] === 1) {
-      //   debugger;
-      // }
-      // if ('hasAnyColConflicts' === 'hasAny' + capitalize(conflictType) + 'Conflicts') { debugger; }
-
       var conflictDetected = board['hasAny' + capitalize(conflictType) + 'Conflicts']();
+
       var conflictExpected = _(expectedConflicts).contains(conflictType);
       var message = conflictExpected ? 'should' : 'should not';
-
-
-      // if (message === 'should find a col conflict') {
-      //   debugger;
-      // }
-
-
 
       it(message + ' find a ' + conflictType + ' conflict', function() {
         if (conflictDetected !== conflictExpected) {
