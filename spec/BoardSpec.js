@@ -69,6 +69,7 @@ describe('Board', function() {
   });
 
   describe('Board with minor diagonal conflicts', function() {
+    // debugger;
     verifyConflictTypes(['minorDiagonal', 'queens'], [
       [0, 0, 1, 0],
       [0, 0, 0, 0],

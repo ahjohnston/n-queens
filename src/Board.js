@@ -149,15 +149,13 @@
       //input can range -(n-1) to (n-1)
       // top left to bottom right
       var board = this.attributes;
-      console.log(board[1]);
       // container for the diagonal cells
       var diagonalCells = [];
 
       // based on the input param, get the diagonal cells
+      // i = row number
       for (var i = 0; i < board.n - Math.abs(majorDiagonalColumnIndexAtFirstRow); i++) {
-        console.log('passed as longwordthingy input: ', majorDiagonalColumnIndexAtFirstRow);
-        console.log('i = ', i, 'row = ', board[i], 'item= ', board[i][majorDiagonalColumnIndexAtFirstRow + i]);
-        if ((majorDiagonalColumnIndexAtFirstRow + i)) {
+        if ((majorDiagonalColumnIndexAtFirstRow + i) >= 0) {
           diagonalCells.push(board[i][majorDiagonalColumnIndexAtFirstRow + i]);
         }
       }
@@ -187,10 +185,15 @@
     hasAnyMajorDiagonalConflicts: function () {
 
       var board = this.attributes;
-
+      if (board[1][0] === 1 && board[3][2] === 1) {
+        debugger;
+      }
       // iterate -(n - 1) to +(n - 1)
       // pass each value thru hasMajorDiagonalConflict
       for (var i = -1 * (board.n - 1); i < board.n; i++) {
+        if (board[1][0] === 1 && board[3][2] === 1 && i === -1) {
+          debugger;
+        }
         if (this.hasMajorDiagonalConflictAt(i)) {
           return true;
         }
@@ -218,12 +221,47 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function (minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      //input: starting index at first row
+      //output: boolean
+      var board = this.attributes;
+
+      //create array to accumlate coordinates of the diagonal line
+      var minDiagonalCells = [];
+
+      //iterate down (row ++) & left (column --) to gather coordinates
+      //use two variables: vertical/rows are incremented ++;  horizontal/columns are decremented --
+      //if either coordinate is out of range, stop
+      var vertical = 0; //row number
+      var horizontal = minorDiagonalColumnIndexAtFirstRow; //column number
+      while (vertical < board.n && horizontal >= 0) {
+        if (horizontal < board.n) {
+          minDiagonalCells.push(board[vertical][horizontal]);
+        }
+        vertical++;
+        horizontal--;
+      }
+      if (this.countPieces(minDiagonalCells) > 1) {
+        return true;
+      }
+
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
+
     hasAnyMinorDiagonalConflicts: function () {
-      return false; // fixme
+      var board = this.attributes;
+
+      //iterate across top row from 0 to 2n -1
+      // i = column number
+      for (var i = 0; i < 2 * board.n - 1; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
+      //_getFirstRowColumnIndexForMinorDiagonalOn();
+
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
