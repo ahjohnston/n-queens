@@ -79,11 +79,14 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+
+
       return false; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      //use this.hasRowConflictsAt
       return false; // fixme
     },
 
@@ -101,7 +104,6 @@
     hasAnyColConflicts: function() {
       return false; // fixme
     },
-
 
 
     // Major Diagonals - go from top-left to bottom-right
@@ -144,5 +146,6 @@
       });
     });
   };
+  console.log(this.Board.prototype.hasAnyColConflicts());
 
 }());
