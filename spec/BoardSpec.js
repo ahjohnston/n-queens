@@ -9,11 +9,16 @@ describe('Board', function() {
     // The Board() constructor will accept a matrix and build that into a (Backbone) Board object (as defined in Board.js)
     var board = new Board(matrix);
     _.map('row col rooks majorDiagonal minorDiagonal queens'.split(' '), function(conflictType) {
+
       var conflictDetected = board['hasAny' + capitalize(conflictType) + 'Conflicts']();
+
       var conflictExpected = _(expectedConflicts).contains(conflictType);
       var message = conflictExpected ? 'should' : 'should not';
 
       it(message + ' find a ' + conflictType + ' conflict', function() {
+        if (conflictDetected !== conflictExpected) {
+          console.log(matrix);
+        }
         expect(conflictDetected).to.be.equal(conflictExpected);
       });
     });
@@ -38,6 +43,7 @@ describe('Board', function() {
   });
 
   describe('Board with col conflicts', function() {
+    // debugger;
     verifyConflictTypes(['col', 'rooks', 'queens'], [
       [1, 0, 0, 0],
       [0, 0, 0, 0],
@@ -63,6 +69,7 @@ describe('Board', function() {
   });
 
   describe('Board with minor diagonal conflicts', function() {
+    // debugger;
     verifyConflictTypes(['minorDiagonal', 'queens'], [
       [0, 0, 1, 0],
       [0, 0, 0, 0],
